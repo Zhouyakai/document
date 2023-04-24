@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/yakai/study/02_UNIX_socket/c++_client/c++_client.cpp
+sys/types.h
+-
+sys/socket.h
+-
+stdio.h
+-
+sys/un.h
+-
+unistd.h
+-
+stdlib.h
+-
+iostream
+-
+chrono
+-
+

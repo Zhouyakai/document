@@ -1,0 +1,77 @@
+创建一个docker可以运行orb2
+安装docker,按照提示即可
+wget http://fishros.com/install -O fishros && bash fishros
+
+sudo apt-get install x11-xserver-utils
+xhost +
+
+docker run --device=/dev/video0:/dev/video0 -it -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix$DISPLAY ubuntu:18.04
+apt-get update
+apt-get install sudo
+sudo apt-get install cmake
+sudo apt-get install git
+sudo apt-get install gcc g++
+sudo apt-get install libeigen3-dev
+sudo apt-get install libglew-dev libpython2.7-dev
+sudo apt-get install libxkbcommon-x11-dev
+cd /home
+git clone https://github.com/stevenlovegrove/Pangolin.git
+cd Pangolin
+git checkout v0.5
+mkdir build
+cd build
+cmake ..
+make -j4
+sudo make install
+sudo apt-get update
+sudo apt-get install software-properties-common
+sudo add-apt-repository "deb http://security.ubuntu.com/ubuntu xenial-security main"
+sudo apt update
+sudo apt install libjasper1 libjasper-dev
+sudo apt-get install build-essential
+sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
+sudo apt-get install python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev
+git clone https://github.com/opencv/opencv.git
+cd opencv
+git checkout 3.4.5
+mkdir build
+cd build
+cmake ..
+make -j4
+sudo make install
+
+docker cp /home/yakai/SLAM/ORB_SLAM2 bca037791655:/home
+docker cp /home/yakai/SLAM/Date/rgbd_dataset_freiburg1_desk bca037791655:/home
+
+cd /home/ORB_SLAM2/Thirdparty/DBoW2
+rm -r build
+cd /home/ORB_SLAM2/Thirdparty/g2o
+rm -r build
+cd /home/ORB_SLAM2
+rm -r build
+./build.sh
+./Examples/RGB-D/rgbd_tum Vocabulary/ORBvoc.txt Examples/RGB-D/TUM1.yaml /home/rgbd_dataset_freiburg1_desk /home/rgbd_dataset_freiburg1_desk/associations.txt
+
+docker commit bca037791655 orb_slam2:v1.0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
